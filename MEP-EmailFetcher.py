@@ -176,12 +176,13 @@ def main(countries: dict[str,str], directory_to_savefiles: str, API_KEY: str = "
         if validateMail:
             if API_KEY != "-":
                 final_df = val_Mails(final_df.copy(),API_KEY)
+                print("Saving Data with validation_info")
+                final_df.to_csv(save_file,index=False)
             else:
                 print("Mail validation is set on true but no key is given!")
         else:
             print("Validation of Mails will not be done!")
-        print("Saving Data with validation_info")
-        final_df.to_csv(save_file,index=False)
+
         
     print("Closing Firefox_Driver...")
     driver.quit()
@@ -250,3 +251,4 @@ def val_Mails(df: pd.DataFrame, API_KEY: str, plan: str = "Basic") -> pd.DataFra
 
 if __name__ == "__main__":
     main(countries, directory_to_savefiles,validation_api_key)
+
